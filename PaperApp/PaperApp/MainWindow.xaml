@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PaperApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{Binding ElementName=MainFrame, Path=Content.Title}" 
+        Height="650" Width="1000"
+        MinHeight="650" MinWidth="1000"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#FF76E383">
+            <TextBlock Text="ИС Делопроизводство"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="30"></TextBlock>
+        </Grid>
+        <Frame x:Name="MainFrame" Grid.Row="1"
+               NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>
