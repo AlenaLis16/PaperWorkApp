@@ -38,20 +38,6 @@ CREATE TABLE DocumentStatus (
     StatusName NVARCHAR(50) NOT NULL
 );
 
--- Создание таблицы Project
-CREATE TABLE Project (
-    Id INT PRIMARY KEY IDENTITY(1,1),
-    ProjectName NVARCHAR(100) NOT NULL
-);
-
--- Создание таблицы Task
-CREATE TABLE Task (
-    Id INT PRIMARY KEY IDENTITY(1,1),
-    TaskName NVARCHAR(100) NOT NULL,
-    IdProject INT NOT NULL,
-    FOREIGN KEY (IdProject) REFERENCES Project(Id)
-);
-
 -- Создание таблицы Document
 CREATE TABLE Document (
     Id INT PRIMARY KEY IDENTITY(1,1),
@@ -132,30 +118,6 @@ VALUES
 (N'На утверждении'),
 (N'Утвержден'),
 (N'Отклонен');
-
--- Наполнение таблицы Project
-INSERT INTO Project (ProjectName)
-VALUES 
-(N'Разработка нового продукта'),
-(N'Автоматизация бухгалтерии'),
-(N'Рекламная кампания'),
-(N'Найм сотрудников'),
-(N'Увеличение продаж'),
-(N'Обновление серверов'),
-(N'Юридическая консультация'),
-(N'Организация корпоративного мероприятия');
-
--- Наполнение таблицы Task
-INSERT INTO Task (TaskName, IdProject)
-VALUES 
-(N'Создание прототипа', 1),
-(N'Разработка отчета по автоматизации', 2),
-(N'Проведение рекламного исследования', 3),
-(N'Публикация вакансий', 4),
-(N'Анализ продаж за прошлый год', 5),
-(N'Замена серверного оборудования', 6),
-(N'Подготовка юридической документации', 7),
-(N'Аренда конференц-зала', 8);
 
 -- Наполнение таблицы Document
 INSERT INTO Document (Title, IdDocumentType, IdEmployee, IdDepartment, IdStatus)
