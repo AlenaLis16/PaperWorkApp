@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="66921ca6ebc14f348afde6018993f188" Name="Diagram1">
+        <EntityTypeShape EntityType="PaperDBModel.ChangeHistory" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaperDBModel.Department" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaperDBModel.Document" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaperDBModel.DocumentStatus" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaperDBModel.DocumentType" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaperDBModel.Employee" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaperDBModel.Position" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaperDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="PaperDBModel.FK__ChangeHis__IdDoc__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="PaperDBModel.FK__Document__IdDepa__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="PaperDBModel.FK__Employee__IdDepa__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="PaperDBModel.FK__Document__IdDocu__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="PaperDBModel.FK__Document__IdEmpl__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="PaperDBModel.FK__Document__IdStat__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="PaperDBModel.FK__Employee__IdPosi__36B12243" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
