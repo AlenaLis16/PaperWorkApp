@@ -15,11 +15,20 @@ namespace PaperApp.Data
     
     public partial class PaperDBEntities : DbContext
     {
+        private static PaperDBEntities _context;
         public PaperDBEntities()
             : base("name=PaperDBEntities")
         {
         }
-    
+        public static PaperDBEntities GetContext()
+        {
+            if (_context == null)
+            {
+                _context = new PaperDBEntities();
+            }
+            return _context;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

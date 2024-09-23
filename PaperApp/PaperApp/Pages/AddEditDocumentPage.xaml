@@ -1,0 +1,44 @@
+﻿<Page x:Class="PaperApp.Pages.AddEditDocumentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PaperApp.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Добавление/редактирование документа">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <Label Content="Наименование:"></Label>
+            <TextBox x:Name="TitleTextBox"></TextBox>
+            <Label Content="Тип:"></Label>
+            <ComboBox x:Name="TypeComboBox"
+                      DisplayMemberPath="TypeName"></ComboBox>
+            <Label Content="Сотрудник:"></Label>
+            <ComboBox x:Name="FullNameComboBox"
+                      DisplayMemberPath="FullName"></ComboBox>
+            <Label Content="Отдел:"></Label>
+            <ComboBox x:Name="DepartmentComboBox"
+                      DisplayMemberPath="DepartmentName"></ComboBox>
+            <Label Content="Статус:"></Label>
+            <ComboBox x:Name="StatusComboBox"
+                      DisplayMemberPath="StatusName"></ComboBox>
+        </StackPanel>
+        
+        
+        <Button x:Name="BackButton" Content="Назад" 
+                Width="150" Click="BackButton_Click" Grid.Row="1"
+                HorizontalAlignment="Left"></Button>
+        <Button x:Name="SaveButton" Content="Сохранить"
+                Click="SaveButton_Click" Grid.Row="1"
+                HorizontalAlignment="Right"></Button>
+    </Grid>
+</Page>

@@ -16,33 +16,23 @@ using System.Windows.Shapes;
 namespace PaperApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
+    /// Логика взаимодействия для AddEditDocumentPage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class AddEditDocumentPage : Page
     {
-        public MainPage()
+        public AddEditDocumentPage()
         {
             InitializeComponent();
-
-            DocumentsDataGrid.ItemsSource = Data.PaperDBEntities.GetContext().Document.ToList();
         }
 
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Classes.Manager.MainFrame.CanGoBack)
-            {
-                Classes.Manager.MainFrame.GoBack();
-            }
+
         }
     }
 }
