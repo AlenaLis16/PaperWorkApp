@@ -20,19 +20,120 @@ namespace PaperApp.Pages
     /// </summary>
     public partial class AddEditDocumentPage : Page
     {
-        public AddEditDocumentPage()
+        public Data.Document _currentDocument = new Data.Document();
+        public string flag = "default";
+        public AddEditDocumentPage(Data.Document _selectedDoc)
         {
             InitializeComponent();
+
+            if (_selectedDoc != null)
+            {
+                _currentDocument = _selectedDoc;
+                flag = "edit";
+            }
+            else
+            {
+                flag = "add";
+            }
+
+            DataContext = _currentDocument;
+
+            Init();
+        }
+
+        public void Init()
+        {
+            try
+            {
+                TypeComboBox.ItemsSource = Data.PaperDBEntities.GetContext().DocumentType.ToList();
+                FullNameComboBox.ItemsSource = Data.PaperDBEntities.GetContext().Employee.ToList();
+                DepartmentComboBox.ItemsSource = Data.PaperDBEntities.GetContext().Department.ToList();
+                StatusComboBox.ItemsSource = Data.PaperDBEntities.GetContext().DocumentStatus.ToList();
+                if (flag == "add")
+                {
+                    TitleTextBox.Text = string.Empty;
+                    TypeComboBox.SelectedItem = null;
+                    FullNameComboBox.SelectedItem = null;
+                    DepartmentComboBox.SelectedItem = null;
+                    StatusComboBox.SelectedItem = null;
+                }
+                else if (flag == "edit")
+                {
+                    TitleTextBox.Text = _currentDocument.Title;
+                    FullNameComboBox.SelectedItem = _currentDocument.Employee;
+                    DepartmentComboBox.SelectedItem = _currentDocument.Department;
+                    TypeComboBox.SelectedItem = _currentDocument.DocumentType;
+                    StatusComboBox.SelectedItem = _currentDocument.DocumentStatus;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                StringBuilder errors = new StringBuilder();
+                if (string.IsNullOrEmpty(TitleTextBox.Text))
+                {
+                    errors.AppendLine("Заполните наименование");
+                }
+                if (TypeComboBox.SelectedItem == null)
+                {
+                    errors.AppendLine("Выберите тип");
+                }
+                if (FullNameComboBox.SelectedItem == null)
+                {
+                    errors.AppendLine("Выберите сотрудника");
+                }
+                if (DepartmentComboBox.SelectedItem == null)
+                {
+                    errors.AppendLine("Выберите отдел");
+                }
+                if (StatusComboBox.SelectedItem == null)
+                {
+                    errors.AppendLine("Выберите статус");
+                }
 
+                if (errors.Length > 0)
+                {
+                    MessageBox.Show(errors.ToString(), "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                _currentDocument.Title = TitleTextBox.Text;
+                _currentDocument.DocumentType = TypeComboBox.SelectedItem as Data.DocumentType;
+                _currentDocument.Employee = FullNameComboBox.SelectedItem as Data.Employee;
+                _currentDocument.Department = DepartmentComboBox.SelectedItem as Data.Department;
+                _currentDocument.DocumentStatus = StatusComboBox.SelectedItem as Data.DocumentStatus;
+
+                if (flag == "add")
+                {
+                    Data.PaperDBEntities.GetContext().Document.Add(_currentDocument);
+                    Data.PaperDBEntities.GetContext().SaveChanges();
+                    MessageBox.Show("Успешно сохранено!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if (flag == "edit")
+                {
+                    Data.PaperDBEntities.GetContext().SaveChanges();
+                    MessageBox.Show("Успешно сохранено!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (Classes.Manager.MainFrame.CanGoBack)
+            {
+                Classes.Manager.MainFrame.GoBack();
+            }
         }
     }
 }

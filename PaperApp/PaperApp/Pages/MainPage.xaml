@@ -6,19 +6,30 @@
       xmlns:local="clr-namespace:PaperApp.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Просмотр документов">
+      Title="Просмотр документов"
+      IsVisibleChanged="Page_IsVisibleChanged">
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <ComboBox x:Name="TypeComboBox" HorizontalAlignment="Left"
+                      DisplayMemberPath="TypeName" Margin="10,0,0,0" Width="170"
+                      SelectionChanged="TypeComboBox_SelectionChanged"></ComboBox>
+            <ComboBox x:Name="StatusComboBox" HorizontalAlignment="Left"
+                      DisplayMemberPath="StatusName" Margin="210,0,0,0" Width="170"
+                      SelectionChanged="StatusComboBox_SelectionChanged"></ComboBox>
+        </Grid>
         
         <DataGrid x:Name="DocumentsDataGrid"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       CanUserDeleteRows="False"
-                      Margin="10" Grid.Row="0">
+                      Margin="10" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Тип" Binding="{Binding DocumentType.TypeName}"></DataGridTextColumn>
@@ -37,10 +48,10 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="BackButton" Content="Назад" 
-                Width="150" Click="BackButton_Click" Grid.Row="1"
+                Width="150" Click="BackButton_Click" Grid.Row="2"
                 HorizontalAlignment="Left"></Button>
         <Button x:Name="AddButton" Content="Добавить" 
-                Width="150" Click="AddButton_Click" Grid.Row="1"
+                Width="150" Click="AddButton_Click" Grid.Row="2"
                 HorizontalAlignment="Right"></Button>
     </Grid>
 </Page>

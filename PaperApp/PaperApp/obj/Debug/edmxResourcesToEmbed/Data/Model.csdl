@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PaperDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ChangeHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdDocument" Type="Int32" Nullable="false" />
+    <Property Name="ChangeDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ChangeDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Document" Relationship="Self.FK__ChangeHis__IdDoc__30F848ED" FromRole="ChangeHistory" ToRole="Document" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Document" Relationship="Self.FK__Document__IdDepa__31EC6D26" FromRole="Department" ToRole="Document" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__IdDepa__35BCFE0A" FromRole="Department" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Document">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdDocumentType" Type="Int32" Nullable="false" />
+    <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+    <Property Name="IdDepartment" Type="Int32" Nullable="false" />
+    <Property Name="IdStatus" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangeHistory" Relationship="Self.FK__ChangeHis__IdDoc__30F848ED" FromRole="Document" ToRole="ChangeHistory" />
+    <NavigationProperty Name="Department" Relationship="Self.FK__Document__IdDepa__31EC6D26" FromRole="Document" ToRole="Department" />
+    <NavigationProperty Name="DocumentType" Relationship="Self.FK__Document__IdDocu__32E0915F" FromRole="Document" ToRole="DocumentType" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Document__IdEmpl__33D4B598" FromRole="Document" ToRole="Employee" />
+    <NavigationProperty Name="DocumentStatus" Relationship="Self.FK__Document__IdStat__34C8D9D1" FromRole="Document" ToRole="DocumentStatus" />
+  </EntityType>
+  <EntityType Name="DocumentStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Document" Relationship="Self.FK__Document__IdStat__34C8D9D1" FromRole="DocumentStatus" ToRole="Document" />
+  </EntityType>
+  <EntityType Name="DocumentType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Document" Relationship="Self.FK__Document__IdDocu__32E0915F" FromRole="DocumentType" ToRole="Document" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdPosition" Type="Int32" Nullable="false" />
+    <Property Name="IdDepartment" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Department" Relationship="Self.FK__Employee__IdDepa__35BCFE0A" FromRole="Employee" ToRole="Department" />
+    <NavigationProperty Name="Document" Relationship="Self.FK__Document__IdEmpl__33D4B598" FromRole="Employee" ToRole="Document" />
+    <NavigationProperty Name="Position" Relationship="Self.FK__Employee__IdPosi__36B12243" FromRole="Employee" ToRole="Position" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PositionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__IdPosi__36B12243" FromRole="Position" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__ChangeHis__IdDoc__30F848ED">
+    <End Role="Document" Type="Self.Document" Multiplicity="1" />
+    <End Role="ChangeHistory" Type="Self.ChangeHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Document">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ChangeHistory">
+        <PropertyRef Name="IdDocument" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Document__IdDepa__31EC6D26">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Document" Type="Self.Document" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="IdDepartment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__IdDepa__35BCFE0A">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="IdDepartment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Document__IdDocu__32E0915F">
+    <End Role="DocumentType" Type="Self.DocumentType" Multiplicity="1" />
+    <End Role="Document" Type="Self.Document" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="IdDocumentType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Document__IdEmpl__33D4B598">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Document" Type="Self.Document" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="IdEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Document__IdStat__34C8D9D1">
+    <End Role="DocumentStatus" Type="Self.DocumentStatus" Multiplicity="1" />
+    <End Role="Document" Type="Self.Document" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="IdStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__IdPosi__36B12243">
+    <End Role="Position" Type="Self.Position" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="IdPosition" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PaperDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ChangeHistory" EntityType="Self.ChangeHistory" />
+    <EntitySet Name="Department" EntityType="Self.Department" />
+    <EntitySet Name="Document" EntityType="Self.Document" />
+    <EntitySet Name="DocumentStatus" EntityType="Self.DocumentStatus" />
+    <EntitySet Name="DocumentType" EntityType="Self.DocumentType" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" />
+    <EntitySet Name="Position" EntityType="Self.Position" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK__ChangeHis__IdDoc__30F848ED" Association="Self.FK__ChangeHis__IdDoc__30F848ED">
+      <End Role="Document" EntitySet="Document" />
+      <End Role="ChangeHistory" EntitySet="ChangeHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Document__IdDepa__31EC6D26" Association="Self.FK__Document__IdDepa__31EC6D26">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Document" EntitySet="Document" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__IdDepa__35BCFE0A" Association="Self.FK__Employee__IdDepa__35BCFE0A">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Document__IdDocu__32E0915F" Association="Self.FK__Document__IdDocu__32E0915F">
+      <End Role="DocumentType" EntitySet="DocumentType" />
+      <End Role="Document" EntitySet="Document" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Document__IdEmpl__33D4B598" Association="Self.FK__Document__IdEmpl__33D4B598">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Document" EntitySet="Document" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Document__IdStat__34C8D9D1" Association="Self.FK__Document__IdStat__34C8D9D1">
+      <End Role="DocumentStatus" EntitySet="DocumentStatus" />
+      <End Role="Document" EntitySet="Document" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__IdPosi__36B12243" Association="Self.FK__Employee__IdPosi__36B12243">
+      <End Role="Position" EntitySet="Position" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
