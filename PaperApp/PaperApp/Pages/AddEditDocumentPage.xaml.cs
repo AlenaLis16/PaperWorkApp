@@ -115,16 +115,60 @@ namespace PaperApp.Pages
                     Data.PaperDBEntities.GetContext().Document.Add(_currentDocument);
                     Data.PaperDBEntities.GetContext().SaveChanges();
                     MessageBox.Show("Успешно сохранено!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    UpdateHistory();
                 }
                 else if (flag == "edit")
                 {
                     Data.PaperDBEntities.GetContext().SaveChanges();
                     MessageBox.Show("Успешно сохранено!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    UpdateHistory();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public void UpdateHistory()
+        {
+            try
+            {
+                var status = StatusComboBox.SelectedItem as Data.DocumentStatus;
+                DateTime now = DateTime.Now;
+                string statusText = string.Empty;
+                switch (status.StatusName)
+                {
+                    case "Черновик":
+                        statusText = "Изменение статуса на \"Черновик\"";
+                        break;
+                    case "В процессе":
+                        statusText = "Изменение статуса на \"В процессе\"";
+                        break;
+                    case "На утверждении":
+                        statusText = "Изменение статуса на \"На утверждении\"";
+                        break;
+                    case "Утвержден":
+                        statusText = "Изменение статуса на \"Утвержден\"";
+                        break;
+                    case "Отклонен":
+                        statusText = "Изменение статуса на \"Отклонен\"";
+                        break;
+                }
+
+                Data.ChangeHistory changeHistory = new Data.ChangeHistory()
+                {
+                    IdDocument = _currentDocument.Id,
+                    ChangeDate = now,
+                    ChangeDescription = statusText
+                };
+
+                Data.PaperDBEntities.GetContext().ChangeHistory.Add(changeHistory);
+                Data.PaperDBEntities.GetContext().SaveChanges();
+            }
+            catch (Exception)
+            {
+
             }
         }
 
