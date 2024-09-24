@@ -50,6 +50,9 @@
         <Button x:Name="BackButton" Content="Назад" 
                 Width="150" Click="BackButton_Click" Grid.Row="2"
                 HorizontalAlignment="Left"></Button>
+        <Button x:Name="HistoryButton" Content="История" 
+                Width="150" Click="HistoryButton_Click" Grid.Row="2"
+                HorizontalAlignment="Center"></Button>
         <Button x:Name="AddButton" Content="Добавить" 
                 Width="150" Click="AddButton_Click" Grid.Row="2"
                 HorizontalAlignment="Right"></Button>

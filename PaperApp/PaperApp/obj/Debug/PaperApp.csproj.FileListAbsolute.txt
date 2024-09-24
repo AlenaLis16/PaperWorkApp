@@ -25,3 +25,5 @@ C:\Users\alisavina\Desktop\PaperWorkApp\PaperApp\PaperApp\obj\Debug\PaperApp.csp
 C:\Users\alisavina\Desktop\PaperWorkApp\PaperApp\PaperApp\obj\Debug\PaperApp.csproj.CopyComplete
 C:\Users\alisavina\Desktop\PaperWorkApp\PaperApp\PaperApp\obj\Debug\PaperApp.exe
 C:\Users\alisavina\Desktop\PaperWorkApp\PaperApp\PaperApp\obj\Debug\PaperApp.pdb
+C:\Users\alisavina\Desktop\PaperWorkApp\PaperApp\PaperApp\obj\Debug\Pages\HistoryStatusesPage.g.cs
+C:\Users\alisavina\Desktop\PaperWorkApp\PaperApp\PaperApp\obj\Debug\Pages\HistoryStatusesPage.baml
